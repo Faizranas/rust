@@ -1,0 +1,19 @@
+{
+  "tabs": [
+    {
+      "name": "For You",
+      "file": "tab-0.json",
+      "hero": true
+    },
+    {
+      "name": "Movies",
+      "file": "tab-1.json",
+      "hero": false
+    },
+    {
+      "name": "Shows",
+      "file": "tab-2.json",
+      "hero": false
+    }
+  ]
+}

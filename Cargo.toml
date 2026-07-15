@@ -1,0 +1,37 @@
+[package]
+name = "app"
+version = "0.1.0"
+edition = "2021"
+
+# cdylib = build a C-style dynamic library, which is what compiles to a .wasm module.
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+# The Rust <-> JavaScript bridge. Generates the glue in pkg/.
+# Exact-pinned: newer versions require rustc 1.77+, but this machine is on 1.76.
+wasm-bindgen = "=0.2.92"
+# Prints Rust panics into the browser console instead of a cryptic "unreachable".
+console_error_panic_hook = "0.1"
+# Thin Rust wrapper over WebGL2 (the GPU API).
+glow = "0.13"
+# Parse content.json into typed Rust structs. "derive" gives us #[derive(Deserialize)].
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# web-sys exposes browser APIs to Rust. We only enable the few we touch directly;
+# glow pulls in the GL-call features it needs on its own.
+[dependencies.web-sys]
+version = "=0.3.69"
+features = [
+  "Window",
+  "Document",
+  "Element",
+  "HtmlCanvasElement",
+  "WebGl2RenderingContext",
+  "ImageBitmap",
+]
+
+# Smaller, faster wasm output for the demo.
+[profile.release]
+opt-level = "s"

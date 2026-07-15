@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rust/Wasm Streaming Demo — M0</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: #111;
+        overflow: hidden;
+      }
+      /* Video sits BEHIND the canvas; the canvas is transparent on the Player screen. */
+      #video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        object-fit: contain;
+        background: #000;
+        display: none; /* shown only while on the Player screen */
+        z-index: 0;
+      }
+      /* The UI surface — everything is drawn here by Rust, on top of the video. */
+      #app {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        width: 100vw;
+        height: 100vh;
+        z-index: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <video id="video" playsinline></video>
+    <canvas id="app"></canvas>
+    <!-- type="module" lets us `import` the wasm glue; also runs after the DOM is ready. -->
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
